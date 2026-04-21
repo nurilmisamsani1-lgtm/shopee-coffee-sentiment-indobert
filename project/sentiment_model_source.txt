@@ -1,0 +1,2 @@
+model_id=mdhugol/indonesia-bert-sentiment-classification
+model_dir=C:\Users\rahma\shopee-coffee-sentiment-indobert\project\models\indonesian_sentiment_mdhugol

@@ -1,0 +1,15 @@
+streamlit
+pandas
+numpy
+matplotlib
+seaborn
+plotly
+scikit-learn
+wordcloud
+beautifulsoup4
+requests
+python-dotenv
+python-dateutil
+lxml
+transformers
+torch --index-url https://download.pytorch.org/whl/cpu
