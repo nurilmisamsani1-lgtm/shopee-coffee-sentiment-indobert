@@ -193,11 +193,14 @@ def main():
 
             wc_pos_text = sanitize_wordcloud_text(wc_df.loc[wc_df["sentiment_label"] == "positive", "comment_clean"])
             wc_neg_text = sanitize_wordcloud_text(wc_df.loc[wc_df["sentiment_label"] == "negative", "comment_clean"])
+            wc_neu_text = sanitize_wordcloud_text(wc_df.loc[wc_df["sentiment_label"] == "neutral", "comment_clean"])
 
-            w1, w2 = st.columns(2)
-            with w1:
+            c1, c2, c3 = st.columns(3)
+            with c1:
                 render_wordcloud(wc_pos_text, f"Wordcloud Positif - {wc_title_suffix}")
-            with w2:
+            with c2:
+                render_wordcloud(wc_neu_text, f"Wordcloud Netral - {wc_title_suffix}")
+            with c3:
                 render_wordcloud(wc_neg_text, f"Wordcloud Negatif - {wc_title_suffix}")
 
             st.subheader("Ranking Produk")
