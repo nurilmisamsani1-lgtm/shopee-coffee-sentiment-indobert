@@ -112,7 +112,7 @@ def main():
     sentiments = sorted(df["sentiment_label"].dropna().unique().tolist())
 
     st.sidebar.header("Filters")
-    selected_products = st.sidebar.multiselect("Product", products, default=products[: min(10, len(products))])
+    selected_products = st.sidebar.multiselect("Product", products, default=products)
     selected_sentiments = st.sidebar.multiselect("Sentiment", sentiments, default=sentiments)
     rating_min, rating_max = st.sidebar.slider("Rating", 1, 5, (1, 5))
 
