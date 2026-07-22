@@ -108,6 +108,21 @@ def main():
 
     df = load_data()
 
+    # Split "2024-03-04 13:02 | Variasi: BIJI SANGRAI"
+    if "date_variant" in df.columns:
+        split_cols = df["date_variant"].str.split(r"\s*\|\s*", n=1, expand=True)
+    
+        df["review_date"] = pd.to_datetime(split_cols[0], errors="coerce")
+    
+        if split_cols.shape[1] > 1:
+            df["variant"] = split_cols[1].str.replace(
+                "Variasi:",
+                "",
+                regex=False
+            ).str.strip()
+        else:
+            df["variant"] = ""
+            
     products = sorted(df["product_name"].dropna().unique().tolist())
     sentiments = sorted(df["sentiment_label"].dropna().unique().tolist())
 
@@ -116,12 +131,23 @@ def main():
     selected_sentiments = st.sidebar.multiselect("Sentiment", sentiments, default=sentiments)
     rating_min, rating_max = st.sidebar.slider("Rating", 1, 5, (1, 5))
 
+    show_only_comments = st.sidebar.checkbox(
+        "Show only reviews with comments",
+        value=False,
+        help="Hide ratings that do not contain a written review."
+    )
+
     filtered = df[
         df["product_name"].isin(selected_products)
         & df["sentiment_label"].isin(selected_sentiments)
         & df["rating"].between(rating_min, rating_max)
     ].copy()
 
+    if show_only_comments:
+        filtered = filtered[
+            filtered["comment"].fillna("").str.strip() != ""
+        ]
+    
     tab_dashboard, tab_test = st.tabs(["Dashboard", "Uji Sentimen Teks"])
 
     with tab_dashboard:
@@ -208,7 +234,16 @@ def main():
             st.dataframe(ranking_view[["product_name", "review_count", "avg_rating", "weighted_rating", "avg_sentiment", "csi", "segment"]], use_container_width=True)
 
             st.subheader("Review Explorer")
-            cols = ["product_name", "username", "rating", "sentiment_label", "sentiment_score", "comment"]
+            cols = [
+                "review_date",
+                "variant",
+                "product_name",
+                "username",
+                "rating",
+                "sentiment_label",
+                "sentiment_score",
+                "comment",
+            ]
             st.dataframe(filtered[cols].sort_values(["rating", "sentiment_score"], ascending=[True, True]), use_container_width=True)
 
         st.subheader("Insight Otomatis")
