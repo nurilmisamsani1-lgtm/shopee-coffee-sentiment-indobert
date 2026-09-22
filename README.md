@@ -19,16 +19,32 @@ Panduan sederhana untuk mengambil data review Shopee, membersihkan data, melakuk
 
 ---
 
-## ✅ STEP 2 — Install Library (Sekali Saja)
+## ✅ STEP 2 — Buat Virtual Environment & Install Library (Sekali Saja)
 
-Jalankan:
+Buka terminal atau command prompt di dalam folder proyekmu, lalu jalankan perintah berikut secara berurutan:
 
+**1. Membuat Virtual Environment:**
+```cmd
+python -m venv env
 ```
+
+**2. Mengaktifkan Virtual Environment:**
+```cmd
+env\Scripts\activate
+```
+*(Pastikan sudah muncul tanda `(env)` di awal baris terminal, yang menandakan venv sudah aktif).*
+
+**3. Install Library:**
+```cmd
 pip install -r requirements.txt
 pip install -r project\requirements_eda.txt
 ```
 
 📌 Tunggu hingga proses selesai.
+
+--- 
+
+**Catatan:** Jika kamu menutup terminal dan ingin menjalankan proyek ini lagi di lain waktu, kamu **hanya perlu mengulangi Langkah 2 (Mengaktifkan Virtual Environment)** sebelum menjalankan kode.
 
 ---
 
