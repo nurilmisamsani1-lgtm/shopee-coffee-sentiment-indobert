@@ -12,7 +12,7 @@ Panduan sederhana untuk mengambil data review Shopee, membersihkan data, melakuk
 2. Jalankan perintah berikut:
 
 ```
-"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=D:\chrome_shopee_profile
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=C:\chrome_shopee_profile
 ```
 
 📌 Chrome akan terbuka dalam mode khusus untuk proses scraping.
